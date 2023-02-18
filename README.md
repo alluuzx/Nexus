@@ -9,3 +9,6 @@ Very simple executor that uses the KRNL API
 # How to add your own scripts
 Add your scripts to the "Scripts" folder.
 It also supports folders!
+
+# Dependencies
+Create a folder named "Scripts" and add "Monaco" to the output folder
