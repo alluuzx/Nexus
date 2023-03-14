@@ -22,9 +22,9 @@ Add a .txt file to the ScriptHub folder. Format needs to be:
 4. Creator font size
 5. Image link
 
-Example:
- print("hi")
- test
- alluuzx
- 11
- https://user-images.githubusercontent.com/95376116/219901629-b33bfbcc-49be-45bb-a8a3-eec3f19eefea.png
+Example: <br />
+print("hi") <br />
+test <br />
+alluuzx <br />
+11 <br />
+https://user-images.githubusercontent.com/95376116/219901629-b33bfbcc-49be-45bb-a8a3-eec3f19eefea.png <br />
