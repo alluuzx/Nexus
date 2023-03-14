@@ -1,0 +1,315 @@
+﻿<Window x:Class="Nexus.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:scrollviewer="clr-namespace:Nexus.Controls.ScrollViewerSmooth"
+        xmlns:Controls="clr-namespace:Nexus.Controls"
+        mc:Ignorable="d"
+        Title="Nexus"
+        ui:ThemeManager.RequestedTheme="Dark"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        BorderBrush="Transparent"
+        Background="Transparent" 
+        WindowStyle="SingleBorderWindow"
+        MinHeight="400" MinWidth="647"
+        Height="500" Width="750"
+        WindowStartupLocation="CenterScreen"
+        Activated="Window_Activated"
+        Deactivated="Window_Deactivated"
+        AllowDrop="True"
+        Drop="Window_Drop">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CaptionHeight="0" CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
+
+    <Border x:Name="MainBorder" BorderThickness="1" Background="#050505" BorderBrush="{StaticResource Gradient}">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.8" Color="Purple"/>
+        </Border.Effect>
+
+        <Grid>
+
+            <Border x:Name="TitleBar" VerticalAlignment="Top" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown" BorderThickness="0" CornerRadius="0" Background="#030303" Height="67">
+                <Grid>
+                    <Button Visibility="Hidden" x:Name="BackBtn" Click="BackBtn_Click" FontFamily="Segoe Fluent Icons" Content="&#xE72B;" Background="#070707" Width="44" FontSize="16" Margin="14,0,0,0"/>
+                    <Label x:Name="TitleText" RenderOptions.BitmapScalingMode="HighQuality" Content="Nexus" FontFamily="Segoe UI Semibold" FontSize="24" Width="104" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="Auto" Foreground="{StaticResource Gradient}">
+                        <Label.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="ResizeMenu" Header="Maximize" Click="ResizeBtn_Click">
+                                    <MenuItem.Icon>
+                                        <ui:SymbolIcon x:Name="ResizeIconMenu" Symbol="FullScreen"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Minimize" Click="MinimizeBtn_Click">
+                                    <MenuItem.Icon>
+                                        <ui:FontIcon Glyph="&#xE738;"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Close" Click="CloseBtn_Click">
+                                    <MenuItem.Icon>
+                                        <ui:FontIcon Glyph="&#xE711;"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </Label.ContextMenu>
+                    </Label>
+
+                    <StackPanel WindowChrome.IsHitTestVisibleInChrome="True" FlowDirection="RightToLeft" HorizontalAlignment="Right" Orientation="Horizontal" Margin="368,0,15,0" Width="262">
+                        <Button Style="{StaticResource TitlebarButton}" Click="CloseBtn_Click" Background="#050505" ToolTip="Close" x:Name="CloseBtn" VerticalAlignment="Center" BorderThickness="0" FontFamily="Segoe Fluent Icons" FontSize="22" Width="38" Height="38" Foreground="{StaticResource Gradient}">
+                            <TextBlock Text="&#xE711;" Margin="-1.5,1.7,0,0">
+                                <TextBlock.Foreground>
+                                    <LinearGradientBrush StartPoint="0,2">
+                                        <GradientStop Color="Purple" Offset="0.347"/>
+                                        <GradientStop Color="Yellow" Offset="3.5"/>
+                                    </LinearGradientBrush>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                        </Button>
+
+                        <Separator Width="15" Background="Transparent"/>
+
+                        <Button Style="{StaticResource TitlebarButton}" Click="ResizeBtn_Click" Background="#050505" x:Name="ResizeBtn" VerticalAlignment="Center" BorderThickness="0" FontFamily="Segoe Fluent Icons" FontSize="20" Width="38" Height="38" Foreground="{StaticResource Gradient}">
+                            <Button.ToolTip>
+                                <ToolTip x:Name="ResizeTip" Content="Maximize"/>
+                            </Button.ToolTip>
+                            <Label Margin="-1.5,1.7,0,0">
+                                <TextBlock.Foreground>
+                                    <LinearGradientBrush StartPoint="0,2">
+                                        <GradientStop Color="Purple" Offset="0.347"/>
+                                        <GradientStop Color="Yellow" Offset="3.5"/>
+                                    </LinearGradientBrush>
+                                </TextBlock.Foreground>
+                                <Label.Content>
+                                    <ui:SymbolIcon x:Name="ResizeSymbol" Symbol="FullScreen"/>
+                                </Label.Content>
+                            </Label>
+                        </Button>
+
+                        <Separator Width="15" Background="Transparent"/>
+
+                        <Button Style="{StaticResource TitlebarButton}" Click="MinimizeBtn_Click" Background="#050505" ToolTip="Minimize" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="MinimizeBtn" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" FontFamily="Segoe Fluent Icons" FontSize="22" Width="38" Height="38" Foreground="{StaticResource Gradient}">
+                            <TextBlock Text="&#xE738;" Margin="-1.5,2,0,0"/>
+                        </Button>
+
+                        <Separator Width="15" Background="Transparent"/>
+
+                        <Button Style="{StaticResource TitlebarButton}" Click="SettingsBtn_Click" Background="#050505" ToolTip="Settings" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="SettingsBtn" VerticalAlignment="Center" BorderThickness="0" FontFamily="Segoe Fluent Icons" FontSize="22" Width="38" Height="38" Foreground="{StaticResource Gradient}">
+                            <TextBlock Text="&#xE713;" Margin="-0.8,0.3,0,0">
+                                <TextBlock.Foreground>
+                                    <LinearGradientBrush StartPoint="0,2">
+                                        <GradientStop Color="Purple" Offset="0.339"/>
+                                        <GradientStop Color="Yellow" Offset="3.5"/>
+                                    </LinearGradientBrush>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                        </Button>
+
+                        <Separator Width="15" Background="Transparent"/>
+
+                        <Button Style="{StaticResource TitlebarButton}" Click="HubBtn_Click" Background="#050505" ToolTip="Script Hub" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="HubBtn" VerticalAlignment="Center" BorderThickness="0" FontFamily="Segoe Fluent Icons" FontSize="21" Width="38" Height="38" Foreground="{StaticResource Gradient}">
+                            <TextBlock Text="&#xE753;" Margin="-0.6,1.3,0,0"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border x:Name="ContentArea" VerticalAlignment="Stretch" Height="Auto" Margin="0,67,0,00" Visibility="Visible">
+                <Grid>
+                    <TabControl
+                        x:Name="EditTabs"
+                        Background="Transparent"
+                        
+                        Style="{StaticResource Tabs}" Height="Auto" Margin="0,-2,1,35">
+                        <TabItem
+                        BorderThickness="1"
+                        x:Name="MainTab"
+                        Header="Main Tab"
+                        Background="Transparent"
+                        Style="{StaticResource Tab}" Width="80" Height="25"/>
+                    </TabControl>
+
+                    <Separator Width="Auto" VerticalAlignment="Bottom" Margin="0,296,0,34" Height="1" Opacity=".1"/>
+
+                    <StackPanel FlowDirection="LeftToRight" Height="28" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="0,300,0,3" HorizontalAlignment="Center">
+
+                        <Button Height="28" ToolTip="Executes the script in Roblox" Click="ExecuteBtn_Click" x:Name="ExecuteBtn" Width="109" FontFamily="Segoe UI Semibold" FontSize="13" VerticalAlignment="Bottom">
+                            <Button.Background>
+                                <SolidColorBrush Color="#121212"/>
+                            </Button.Background>
+
+                            <Grid Height="30" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label FontSize="12" FontFamily="Segoe Fluent Icons" Content="&#xE768;" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                <Label FontSize="12" Content=" Execute" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,0,0,0"/>
+                            </Grid>
+                        </Button>
+
+                        <Separator Width="15" Background="Transparent"/>
+
+                        <Button ToolTip="Injects to Roblox" Click="InjectBtn_Click" x:Name="InjectBtn" Width="109" FontSize="12" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom">
+                            <Button.Background>
+                                <SolidColorBrush Color="#121212"/>
+                            </Button.Background>
+
+                            <Grid Height="30" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label FontSize="12" FontFamily="Segoe Fluent Icons" Content="&#xE8AF;" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="13,0,0,0"/>
+                                <Label FontSize="12" Content=" Inject" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                            </Grid>
+                        </Button>
+
+                        <Separator Width="15" Background="Transparent"/>
+
+                        <Button ToolTip="Clears the text editor" Click="ClearBtn_Click" x:Name="ClearBtn" Width="109" FontSize="13" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom">
+                            <Button.Background>
+                                <SolidColorBrush Color="#121212"/>
+                            </Button.Background>
+
+                            <Grid Height="30" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label FontSize="12" FontFamily="Segoe Fluent Icons" Content="&#xE74D;" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,0,0,0"/>
+                                <Label FontSize="12" Content=" Clear" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="32,0,0,0"/>
+                            </Grid>
+                        </Button>
+
+                        <Separator Width="15" Background="Transparent"/>
+
+                        <Button ToolTip="Open a file" Click="OpenBtn_Click" x:Name="OpenBtn" Width="109" FontSize="13" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom">
+                            <Button.Background>
+                                <SolidColorBrush Color="#121212"/>
+                            </Button.Background>
+
+                            <Grid Height="30" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label FontSize="12" FontFamily="Segoe Fluent Icons" Content="&#xE8DA;" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,0,0,0"/>
+                                <Label FontSize="12" Content=" Open" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="32,0,0,0"/>
+                            </Grid>
+                        </Button>
+
+                        <Separator Width="15" Background="Transparent"/>
+
+                        <Button ToolTip="Save the current file" Click="SaveBtn_Click" x:Name="SaveBtn" Width="109" FontSize="13" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom">
+                            <Button.Background>
+                                <SolidColorBrush Color="#121212"/>
+                            </Button.Background>
+
+                            <Grid Height="30" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label FontSize="12" FontFamily="Segoe Fluent Icons" Content="&#xE78C;" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                <Label FontSize="12" Content=" Save as" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,0,0,0"/>
+                            </Grid>
+                        </Button>
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <Border x:Name="SettingsArea" VerticalAlignment="Stretch" Height="Auto" Margin="0,67,0,00" Visibility="Hidden">
+                <Grid>
+                    <scrollviewer:SmoothScrollViewer MaxWidth="1000" HorizontalAlignment="Stretch" Width="Auto" Margin="0,0,167,0" VerticalScrollBarVisibility="Auto">
+                        <Grid>
+                            <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SettingsTitle" Content="Settings" FontFamily="Segoe UI Semibold" Margin="16,6,0,0" Height="34"/>
+                            <StackPanel x:Name="SettingsItems" Orientation="Vertical" FlowDirection="LeftToRight" Margin="11,62,11,0" Height="Auto">
+                                <Border CornerRadius="4" Background="#151515" Height="70">
+                                    <Grid>
+                                        <ui:ToggleSwitch HorizontalAlignment="Right" Toggled="TopMostSwitch_Toggled" x:Name="TopMostSwitch" Width="44" Margin="0,0,12,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Top Most" FontFamily="Segoe UI Semibold" Foreground="White" Margin="10,11,0,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Make this window always on top" FontFamily="Segoe UI" Opacity="0.70" Foreground="White" Margin="10,0,0,11"/>
+                                    </Grid>
+                                </Border>
+                                <Separator Background="Transparent" Height="20"/>
+                                <Border CornerRadius="4" Background="#151515" Height="70">
+                                    <Grid>
+                                        <ui:ToggleSwitch Toggled="UnlockFpsSwitch_Toggled" x:Name="UnlockFpsSwitch" Width="44" HorizontalAlignment="Right" Margin="0,0,12,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Unlock FPS" FontFamily="Segoe UI Semibold" Foreground="White" Margin="10,11,0,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Unlocks the Roblox FPS limit of 60" FontFamily="Segoe UI" Opacity="0.70" Foreground="White" Margin="10,0,0,11"/>
+                                    </Grid>
+                                </Border>
+                                <Separator Background="Transparent" Height="20"/>
+                                <Border CornerRadius="4" Background="#151515" Height="70">
+                                    <Grid>
+                                        <ui:ToggleSwitch x:Name="AutoInjectSwitch" Toggled="AutoInjectSwitch_Toggled" Width="44" HorizontalAlignment="Right" Margin="0,0,12,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Auto Inject" FontFamily="Segoe UI Semibold" Foreground="White" Margin="10,11,0,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Inject automatically when Roblox is launched" FontFamily="Segoe UI" Opacity="0.70" Foreground="White" Margin="10,0,0,11"/>
+                                    </Grid>
+                                </Border>
+                                <Separator Background="Transparent" Height="20"/>
+                                <Border CornerRadius="4" Background="#151515" Height="70">
+                                    <Grid>
+                                        <ui:ToggleSwitch x:Name="MultiInstanceSwitch" Toggled="MultiInstanceSwitch_Toggled" Width="44" HorizontalAlignment="Right" Margin="0,0,12,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Multi-Instance" FontFamily="Segoe UI Semibold" Foreground="White" Margin="10,11,0,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Allow multiple Roblox instances to be open" FontFamily="Segoe UI" Opacity="0.70" Foreground="White" Margin="10,0,0,11"/>
+                                    </Grid>
+                                </Border>
+                                <Separator Background="Transparent" Height="20"/>
+                                <Border CornerRadius="4" Background="#151515" Height="70">
+                                    <Grid>
+                                        <ui:ToggleSwitch x:Name="EditorMinimapSwitch" Toggled="EditorMinimapSwitch_Toggled" Width="44" HorizontalAlignment="Right" Margin="0,0,12,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Editor Minimap" FontFamily="Segoe UI Semibold" Foreground="White" Margin="10,11,0,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Show a minimap in the editor" FontFamily="Segoe UI" Opacity="0.70" Foreground="White" Margin="10,0,0,11"/>
+                                    </Grid>
+                                </Border>
+                                <Separator Background="Transparent" Height="20"/>
+                                <Border CornerRadius="4" Background="#151515" Height="70">
+                                    <Grid>
+                                        <ui:ToggleSwitch x:Name="AutoLaunchSwitch" Toggled="AutoLaunchSwitch_Toggled" Width="44" HorizontalAlignment="Right" Margin="0,0,12,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Auto Launch" FontFamily="Segoe UI Semibold" Foreground="White" Margin="10,11,0,0"/>
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Automatically open Nexus when you start Windows" FontFamily="Segoe UI" Opacity="0.70" Foreground="White" Margin="10,0,0,11"/>
+                                    </Grid>
+                                </Border>
+                                <Separator Background="Transparent" Height="10"/>
+                            </StackPanel>
+                        </Grid>
+                    </scrollviewer:SmoothScrollViewer>
+
+                    <Border x:Name="SettingsMisc" Background="#020202" HorizontalAlignment="Right" Margin="478,0,0,0" Width="167">
+                        <Grid>
+                            <Label Content="Made by alluuzx" Opacity=".7" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,28,0,0"/>
+                            <Button Click="ResetBtn_Click" ToolTip="Reset ALL settings in Nexus" x:Name="ResetBtn" Content="Reset Settings" Background="#FF9A3565" VerticalAlignment="Bottom" Margin="0,235,0,60" Width="115" HorizontalAlignment="Center"/>
+                            <Button Click="KillRbxBtn_Click" ToolTip="Kill the Roblox process" x:Name="KillRbxBtn" Content="Kill Roblox" Background="#FFA1425F" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,288,0,10" Width="115"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Border x:Name="ScriptHubArea" Visibility="Hidden" Margin="0,67,0,00">
+                <Grid>
+                    <Border Background="#151515" Width="1" HorizontalAlignment="Left" Margin="169,0,475,0"/>
+                    <Border AllowDrop="False" HorizontalAlignment="Left" Margin="0,0,476,0" Background="#030303">
+                        <Grid>
+                            <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ScriptHubTitle" Content="Script Hub" FontFamily="Segoe UI Semibold" Margin="16,6,0,0" Height="34"/>
+                            <ToggleButton Checked="ScriptListBtn_Checked" Unchecked="ScriptListBtn_Unchecked" x:Name="ScriptListBtn" FontSize="14" Content="Script List" Background="#030303" Margin="0,73,0,0" VerticalAlignment="Top" Width="169" Height="45"/>
+                            <ToggleButton Checked="ScriptHubBtn_Checked" Unchecked="ScriptHubBtn_Unchecked" x:Name="ScriptHubBtn" FontSize="14" Content="Community" Background="#030303" Margin="0,118,0,0" VerticalAlignment="Top" Width="169" Height="45"/>
+                        </Grid>
+                    </Border>
+
+                    <TreeView ScrollViewer.CanContentScroll="True" VirtualizingPanel.ScrollUnit="Item" Visibility="Hidden" x:Name="ScriptList" Margin="170,0,0,0" Loaded="ScriptList_Loaded" SelectedItemChanged="ScriptList_SelectedItemChanged" Drop="ScriptList_Drop">
+                        <TreeViewItem x:Name="Scripts" Header="📁  Scripts" IsExpanded="True">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Reload" Click="MenuItem_Click">
+                                        <MenuItem.Icon>
+                                            <ui:FontIcon Glyph="&#xE72C;"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Open Scripts Folder" Click="MenuItem_Click_1">
+                                        <MenuItem.Icon>
+                                            <ui:FontIcon Glyph="&#xEC50;"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                        </TreeViewItem>
+                    </TreeView>
+
+                    <scrollviewer:SmoothScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" VirtualizingPanel.ScrollUnit="Item" x:Name="ScriptHubItems" Visibility="Hidden" Margin="170,0,0,0">
+                        <Controls:ItemMarginWrapPanel x:Name="ItemList" Height="Auto" Width="Auto" ItemMargin="8" HorizontalAlignment="Center"/>
+                    </scrollviewer:SmoothScrollViewer>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+    </Border>
+
+</Window>
