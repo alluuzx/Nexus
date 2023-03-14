@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Nexus": {
-      "commandName": "Project",
-      "commandLineArgs": "/debug\r\n"
-    }
-  }
-}
