@@ -1,3 +1,5 @@
+![negus](https://github.com/alluuzx/Nexus/assets/95376116/f59f6e47-c6d4-422f-9d3f-e9758ad09a81)
+
 # Nexus
 Advanced executor that uses the KRNL API
 
@@ -11,11 +13,13 @@ Advanced executor that uses the KRNL API
 * Advanced script list
 * Beautiful UI
 * Dynamic executor buttons
+* Debug console with logs
 * And much more!
 
 # Dependencies
 * .Net 7 to run
 * Visual Studio 2022 to build
+* Make sure to restore everything or Nexus will crash!
 
 # How to add your own scripts
 Add your scripts to the "Scripts" folder.
@@ -35,4 +39,4 @@ print("hi") <br />
 test <br />
 alluuzx <br />
 11 <br />
-https://user-images.githubusercontent.com/95376116/219901629-b33bfbcc-49be-45bb-a8a3-eec3f19eefea.png <br />
+https://github.com/alluuzx/Nexus/assets/95376116/f59f6e47-c6d4-422f-9d3f-e9758ad09a81 <br />
