@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "Nexus": {
-      "commandName": "Project",
-      "commandLineArgs": "/debug",
-      "nativeDebugging": true
-    }
-  }
-}
