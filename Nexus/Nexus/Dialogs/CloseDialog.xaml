@@ -1,0 +1,12 @@
+﻿<ui:ContentDialog
+    x:Class="Nexus.Dialogs.CloseDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+    Title="Do you want to close all tabs?"
+    PrimaryButtonText="Close All"
+    CloseButtonText="Cancel"
+    Background="#121212"
+    DefaultButton="Primary">
+
+</ui:ContentDialog>

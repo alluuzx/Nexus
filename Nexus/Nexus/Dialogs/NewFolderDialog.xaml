@@ -1,0 +1,19 @@
+﻿<ui:ContentDialog
+    x:Class="Nexus.Dialogs.NewFolderDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+    Title="New Folder"
+    PrimaryButtonText="Create"
+    CloseButtonText="Cancel"
+    Background="#121212"
+    DefaultButton="Primary"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
+
+    <StackPanel>
+        <TextBlock Text="Name" TextWrapping="Wrap"/>
+        <Separator Background="Transparent"/>
+        <TextBox x:Name="NameBox" MaxLines="1" MaxLength="30" Background="#0F0F0F"/>
+    </StackPanel>
+
+</ui:ContentDialog>
